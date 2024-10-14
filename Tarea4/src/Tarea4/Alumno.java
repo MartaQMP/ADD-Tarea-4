@@ -3,6 +3,10 @@ package Tarea4;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @author Marta
+ */
+
 public class Alumno {
 			int nia;
 			String nombre, apellidos, ciclo, curso, grupo;

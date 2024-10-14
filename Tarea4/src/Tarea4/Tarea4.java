@@ -8,7 +8,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- * @author MQM-P
+ * @author Marta
  */
 
 public class Tarea4 {
