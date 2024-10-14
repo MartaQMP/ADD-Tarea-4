@@ -7,6 +7,10 @@ import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/**
+ * @author MQM-P
+ */
+
 public class Tarea4 {
 	static Scanner sc = new Scanner(System.in);
 
@@ -14,14 +18,14 @@ public class Tarea4 {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		// Solicitar la ruta y nombre del archivo
-		System.out.println("Introduce el nombre y la dirección del archivo: ");
-		String nombreArchivo = sc.nextLine();
+		System.out.println("Introduce la dirección del archivo: ");
+		String ruta = sc.nextLine();
 
 		try {
-			FileOutputStream fos = new FileOutputStream(nombreArchivo);
+			FileOutputStream fos = new FileOutputStream(ruta);
 			DataOutputStream dos = new DataOutputStream(fos);
 
-			for (int i = 1; i <= 5; i++) {
+			for (int i = 0; i < 5; i++) {
 				int nia = pedirNia();
 				String nombre = pedirNombre();
 				String apellidos = pedirApellidos();
@@ -43,17 +47,23 @@ public class Tarea4 {
 				dos.writeUTF(alumno.getCurso());
 				dos.writeUTF(alumno.getGrupo());
 				
-				dos.close(); 
 			}
+			
+			dos.close(); 
 
 		} catch (IOException e) {
-			System.out.println("Ha ocurrido un error al escribir en el archivo: " + e.getMessage());
+			System.out.println("Error: " + e.getMessage());
 		}
-
+		
 		sc.close();
 	}
 
 	// Pedir datos
+	
+	/**
+	 * 
+	 * @return NIA
+	 */
 	private static int pedirNia() {
 		int nia = 0;
 		try {
@@ -61,22 +71,34 @@ public class Tarea4 {
 			nia = sc.nextInt();
 		} catch (InputMismatchException e) {
 			System.out.println("Error: Debes introducir un número entero.");
-			sc.next(); // Limpiar el buffer
+			sc.next();
 		}
 		return nia;
 	}
-
+	
+	/**
+	 * 
+	 * @return nombre
+	 */
 	private static String pedirNombre() {
 		sc.nextLine();
 		System.out.println("Dime el nombre");
 		return sc.nextLine();
 	}
-
+	
+	/**
+	 * 
+	 * @return apellidos
+	 */
 	private static String pedirApellidos() {
 		System.out.println("Dime los apellidos");
 		return sc.nextLine();
 	}
-
+	
+	/**
+	 * 
+	 * @return genero
+	 */
 	private static char pedirGenero() {
 		System.out.println("Dime el genero. M o H");
 		String palabra = sc.next();
@@ -87,7 +109,11 @@ public class Tarea4 {
 		char g = palabra.charAt(0);
 		return g;
 	}
-
+	
+	/**
+	 * 
+	 * @return fecha nacimiento
+	 */
 	private static Date pedirFecNac() {
 		sc.nextLine();
 		Date fecha = null;
@@ -111,17 +137,29 @@ public class Tarea4 {
 
 		return fecha;
 	}
-
+	
+	/**
+	 * 
+	 * @return ciclo
+	 */
 	private static String pedirCiclo() {
 		System.out.println("Dime el ciclo");
 		return sc.next();
 	}
-
+	
+	/**
+	 * 
+	 * @return curso
+	 */
 	private static String pedirCurso() {
 		System.out.println("Dime el curso");
 		return sc.next();
 	}
-
+	
+	/**
+	 * 
+	 * @return grupo
+	 */
 	private static String pedirGrupo() {
 		System.out.println("Dime el grupo");
 		return sc.next();
