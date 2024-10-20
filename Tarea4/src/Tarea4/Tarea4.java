@@ -17,45 +17,39 @@ public class Tarea4 {
 	public static void main(String[] args) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-		// Solicitar la ruta y nombre del archivo
+		// Pedir la ruta del archivo
 		System.out.println("Introduce la dirección del archivo: ");
 		String ruta = sc.nextLine();
+		
+		FileOutputStream fos;
+		DataOutputStream dos = null;
 
 		try {
-			FileOutputStream fos = new FileOutputStream(ruta);
-			DataOutputStream dos = new DataOutputStream(fos);
+			fos = new FileOutputStream(ruta);
+			dos = new DataOutputStream(fos);
 
 			for (int i = 0; i < 5; i++) {
-				int nia = pedirNia();
-				String nombre = pedirNombre();
-				String apellidos = pedirApellidos();
-				char genero = pedirGenero();
-				Date fecha = pedirFecNac();
-				String ciclo = pedirCiclo();
-				String curso = pedirCurso();
-				String grupo = pedirGrupo();
-				Alumno alumno = new Alumno(nia, nombre, apellidos, ciclo, curso, grupo, genero, fecha);
-				System.out.println(alumno);
-
-				// Escribir datos
-				dos.writeInt(alumno.getNia());
-				dos.writeUTF(alumno.getNombre());
-				dos.writeUTF(alumno.getApellidos());
-				dos.writeChar(alumno.getGenero());
-				dos.writeUTF(sdf.format(alumno.getFecNac()));
-				dos.writeUTF(alumno.getCiclo());
-				dos.writeUTF(alumno.getCurso());
-				dos.writeUTF(alumno.getGrupo());
-				
-			}
-			
-			dos.close(); 
+				//Pedir y escribir datos
+				dos.writeInt(pedirNia());
+				dos.writeUTF(pedirNombre());
+				dos.writeUTF(pedirApellidos());
+				dos.writeChar(pedirGenero());
+				dos.writeUTF(sdf.format(pedirFecNac()));
+				dos.writeUTF(pedirCiclo());
+				dos.writeUTF(pedirCurso());
+				dos.writeUTF(pedirGrupo());
+			} 
 
 		} catch (IOException e) {
 			System.out.println("Error: " + e.getMessage());
+		} finally {
+			try {
+				dos.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			sc.close();
 		}
-		
-		sc.close();
 	}
 
 	// Pedir datos
